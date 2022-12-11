@@ -10,6 +10,7 @@ npm install -g heroku
 
 Completed setup:
 MVC file structure
+------user credentials are saved and I am logged into the site
 
 Connections Completed:
 config/connection complete
@@ -55,7 +56,7 @@ Your task this week is to build a CMS-style blog site
 ---choose to sign up
 ------prompted to create a username and password
 ---click on the sign-up button
-------user credentials are saved and I am logged into the site
+
 ------WHEN I revisit the site I am prompted to enter my username and password
 ---WHEN I am signed in to the site
 ------I see navigation links for the homepage, the dashboard, and the option to log out

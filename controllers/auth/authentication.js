@@ -1,6 +1,8 @@
-function isAuthenticated (req, res, next) {
+function checkAuth (req, res, next) {
     if (req.session.user) 
         next();
     else
-        next('/login.html');
+        res.status(400).json({err: 'You must be logged in to perform this action.'});
 }
+
+module.exports = checkAuth;

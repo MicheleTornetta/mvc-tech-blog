@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const User = require('../../models/user');
+const checkAuth = require('../auth/authentication');
 
 // GET one user
 router.get('/:id', async (req, res) => {
@@ -114,11 +115,11 @@ router.post('/login', async (req, res) => {
 // });
 
 // PUT update a user
-router.put('/:id', async (req, res) => {
+router.put('/', checkAuth, async (req, res) => {
   try {
     const userData = await User.update(req.body, {
       where: {
-        id: req.params.id,
+        id: req.session.user,
       },
     });
     if (!userData[0]) {

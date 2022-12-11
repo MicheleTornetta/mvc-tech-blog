@@ -18,12 +18,21 @@ app.use(session({
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+// app.set('views', path.join(__dirname, 'views/'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public/')));
 
 app.use('/api', require('./controllers/api/index'));
+
+// Add a comment describing the purpose of the 'get' route
+// GET route for getting all of the dishes that are on the menu
+app.get('/', async (req, res) => {
+  // Add a comment describing the purpose of the render method
+  // This method is rendering the 'all' Handlebars.js template. This is how we connect each route to the correct template.
+  res.render('all');
+});
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening http://localhost:' + PORT));
