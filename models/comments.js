@@ -20,19 +20,10 @@ Comments.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    arthor: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     comment: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    post_id: {
-      type: DataTypes.INTEGER,
-      // category_id: 0
-    },
-
   },
   // config options
   {

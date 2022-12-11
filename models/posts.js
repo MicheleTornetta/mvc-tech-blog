@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
+const Users = require('./user');
 const sequelize = require('../config/connection');
+const Comments = require('./comments');
 
 class Posts extends Model {}
 
@@ -11,17 +13,17 @@ Posts.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    Title: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    Arthur: {
+    article: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Article: {
-      type: DataTypes.STRING,
+    date: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
   },
@@ -31,7 +33,21 @@ Posts.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'posts',
+
+    //to load database whenever it's changed for the purpose of handlebars
+    hooks: {
+      afterSave: updateGlobalVariable,
+      afterBulkUpdate: updateGlobalVariable,
+      afterBulkDestroy: updateGlobalVariable
+    }
   }
 );
+
+async function updateGlobalVariable() {
+  global.posts = await Posts.findAll({
+    include: [ Users, Comments ],
+    order: [['date', 'DESC']],
+  });
+}
 
 module.exports = Posts;

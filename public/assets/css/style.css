@@ -1,166 +1,80 @@
-:root {
-    --primary: #389393;
-    --secondary: #f5a25d;
-    --tertiary: #fa7f72;
-    --quatrinary: #6c6b67;
-    --light: #ebebeb;
-    --dark: #182c23;
-    --error: rgb(228, 46, 1);
-    --border-radius: 0.3rem;
-  }
-  
-  body {
-    font-family: Arial;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    justify-content: flex-start;
-    background-color: var(--quatrinary);
-  }
-  
-  header {
-    padding: 40px;
-    text-align: center;
-    background: var(--primary);
-    color: var(--secondary);
-    border-bottom-style: solid;
-  }
-  
-  main {
-    display: flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
-  }
-  
-  aside {
-    flex: 0;
-    background-color: var(--tertiary);
-    padding: 80px;
-    text-align: left;
-    color: var(--light);
-  }
-  
-  nav {
-    display: flex;
-    background-color: var(--secondary);
-  }
-  
-  .menu-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 75%;
-    min-height: 100%;
-    margin: 0px auto;
-    border: 3px solid var(--primary);
-    border-radius: var(--border-radius);
-    border-style: solid;
-    border-width: medium;
-    background-color: var(--light);
-    color: var(--dark);
-    padding: 50px;
-    background-color: #ebebeb;
-  }
-  
-  .add-dish-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 35%;
-    min-height: 100%;
-    min-width: 35%;
-    margin: 5px auto;
-    border: 3px solid var(--primary);
-    border-radius: var(--border-radius);
-    border-style: solid;
-    border-width: medium;
-    background-color: var(--light);
-    color: var(--dark);
-    padding: 50px;
-    text-align: center;
-    background-color: var(--tertiary);
-  }
-  
-  .edit-dish-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 35%;
-    min-height: 100%;
-    min-width: 35%;
-    margin: 5px auto;
-    border: 3px solid var(--primary);
-    border-radius: var(--border-radius);
-    border-style: solid;
-    border-width: medium;
-    background-color: var(--light);
-    color: var(--dark);
-    padding: 50px;
-    text-align: center;
-    background-color: var(--tertiary);
-  }
-  
-  /* CARDS */
-  .dish-card {
-    margin: 20px;
-    flex: 0 1 300px;
-    padding: 5px;
-    width: 35%;
-    min-height: 100%;
-    min-width: 35%;
-    border: 3px solid var(--primary);
-    border-radius: var(--border-radius);
-    border-style: solid;
-    border-width: medium;
-    background-color: var(--light);
-    color: var(--dark);
-  }
-  
-  .menu-card {
-    margin: 50px;
-    flex: 0 1 300px;
-    padding: 5px;
-    border: 3px solid var(--dark);
-    border-radius: var(--border-radius);
-    border-style: groove;
-    border-width: thick;
-    background-color: var(--light);
-    color: var(--dark);
-  }
-  
-  .card-header {
-    color: var(--light);
-    margin: 0;
-    background-color: var(--secondary);
-    padding: 0.625rem;
-    border: 3px solid var(--primary);
-    border-radius: var(--border-radius);
-    border-style: solid;
-    border-width: medium;
-  }
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+}
 
-  .has-nuts {
-    color: var(--error)
-  }
+/*header decoration*/
 
-  .dish-card-header {
-    font-size: 1.5rem;
-    color: var(--tertiary);
-    margin: 0;
-    background-color: var(--light);
-    padding: 0.625rem;
-    border-bottom-style: solid;
-  }
-  
-  .card-body {
-    padding: 2.5%;
-    font-size: 1.4rem;
-    text-align: center;
-  }
-  
-  /* LAYOUT */
-  .container {
-    display: flex;
-    flex-flow: column wrap;
-    align-content: flex-start;
-    align-items: center;
-  }
-  
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+  color: black;
+  border-radius: 0;
+  border-bottom: 10px solid black;
+  flex-direction: column;
+}
+
+/*each row of the calendar */
+.rowBox {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
+/*save buttone at the end of each row of the calendar */
+.saveBox {
+  height: 40px;
+  width: 65px;
+  padding: 10px 0px 10px 10px;
+  justify-self: right;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+}
+/*text input of each row of the calendar */
+.inputBox {
+  height: 40px;
+  width: 600px;
+  min-width: 100px;
+  padding: 10px 0px 10px 3px;
+  display: flex;
+  background: transparent;
+  border: none;
+  resize: none;
+  color: #000000;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+/*time slot on each row of the calendar */
+.timeBox {
+  height: 40px;
+  width: 100px;
+  text-align: center;
+  padding: 10px 0px 10px 10px;
+  display: flex;
+  background-color: #000000;
+  color: #ffffff;
+  border-top: 1px dashed #000000;
+}
+
+/*color of input box when past the hour*/
+.past {
+  background-color: #adadad;
+  color: #333333;
+}
+
+/*color of input box at the present hour*/
+.present {
+  background-color: #ac3b61;
+  color: white;
+}
+
+/*color of input box when the hour is in future*/
+.future {
+  background-color: #123c69;
+  color: white;
+}

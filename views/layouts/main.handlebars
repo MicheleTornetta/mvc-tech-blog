@@ -1,20 +1,51 @@
-<head>
-  <meta charset="UTF-8">
-  <title>Potluck Party</title>
-  <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./public/assets/css/reset.css" />
+    <link rel="stylesheet" href="./public/assets/css/jass.css" />
+    <link rel="stylesheet" href="./public/assets/css/style.css" />
 
-<body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        GoLive WebDev Tech Blog ASDASD
-      </h1>
-    </header>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href=".public/sssets/css/style.css" />
+    {{! // <script src="./assets/js/script.js" defer></script> }}
+    <title>GoLive WebDev Tech Blog</title>
+  </head>
+
+  <body>
+    <div class="flex-column justify-space-around">
+      <header class="jumbotron">
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </nav>
+        <h1>
+          GoLive WebDev Tech Blog ASDASD
+        </h1>
+
+      </header>
       <main class="container container-fluid mt-5">
-asdf      </main>
-  </div>
+        {{{posts}}}
+      </main>
+    </div>
   </body>
 
 </html>

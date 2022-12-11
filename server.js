@@ -2,11 +2,19 @@ require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+
+const helpers = require('./helpers');
+
+const hbs = exphbs.create({
+  helpers: {
+    posts: helpers.posts
+  }
+});
 const app = express();
 const PORT = process.env.PORT || 3005;
 const sequelize = require('./config/connection');
 const session = require('express-session');
+const { Posts, Users, Comments } = require('./models');
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -15,6 +23,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
+
+global.posts = [];
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -34,6 +44,11 @@ app.get('/', async (req, res) => {
   res.render('all');
 });
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false }).then(async () => {
+  global.posts = await Posts.findAll({
+    include: [ Users, { model: Comments, include: [Users] } ],
+    order: [['date', 'DESC']]
+  });
+
   app.listen(PORT, () => console.log('Now listening http://localhost:' + PORT));
 }); 
