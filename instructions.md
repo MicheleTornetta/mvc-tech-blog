@@ -14,14 +14,16 @@ MVC file structure
 Connections Completed:
 config/connection complete
 schema complete
+models user.js complete
+
 
 Tested:
 Server connection good
-
+Heroku working
 
 
 Issues/Steps
-1. heroku push failed
+1. 
 
 
 
