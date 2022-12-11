@@ -24,10 +24,6 @@ Posts.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    comments_id: {
-      type: DataTypes.INTEGER,
-      // category_id: 0
-    },
   },
   {
     sequelize,

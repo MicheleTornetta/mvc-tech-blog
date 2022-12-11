@@ -15,7 +15,9 @@ Connections Completed:
 config/connection complete
 schema complete
 models user.js complete
-
+user-routes
+comments-routs
+post-routs
 
 Tested:
 Server connection good

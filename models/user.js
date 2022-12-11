@@ -28,9 +28,6 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [8],
-      },
     },
   },
   {
@@ -44,7 +41,7 @@ User.init(
       },
       beforeUpdate: async (updatedUserdata) => {
         // updates have squishy or very flexible inputs so we should validate before hashing
-        if(typeof updatedUserdata.password !== 'undefined'){
+        if(typeof updatedUserdata.password !== undefined){
           updatedUserdata.password = await bcrypt.hash(updatedUserdata.password, SALT);
         }
         return updatedUserdata;
