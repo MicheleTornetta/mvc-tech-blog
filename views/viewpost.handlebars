@@ -1,18 +1,24 @@
 <h3>{{title}}</h3>
 <p>{{article}}</p>
 <p>Posted on {{date}} by {{username}}</p>
+
+<h4>Comments</h4>
 <ul>
-  {{#each comment}}
-  <li>{{this.comment}} by ({{this.username}} on {{this.date}})</li>
+  {{#each comments}}
+  <li>{{this.comment}} <i>by {{this.user}} on {{this.date}}</i></li>
   {{/each}}
 </ul>
 
+{{#if user}}
 <form method="post" id="form">
   <label for="comment">Add comment</label>
   <input type="text" name="comment" id="comment">
   <input type="submit" value="Submit Comment">
 </form>
-
+{{/if}}
+{{#unless user}}
+<p><a href="/login">Login</a> to add a comment.</p>
+{{/unless}}
 <script>
   document.getElementById('form').onsubmit = async e => {
     e.preventDefault();

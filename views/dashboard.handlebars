@@ -1,3 +1,9 @@
+<ul>
+{{#each posts}}
+  <li><a href="/post/edit/{{this.id}}">{{this.title}}</a></li>
+{{/each}}
+</ul>
+
 <button id="show-button" onclick="showForm()">Create Post</button>
 
 <div id="form-holder" style="display: none;">

@@ -1,0 +1,66 @@
+<form class="form" id="form" method="post">
+  <h2>Edit Post</h2>
+  <div>
+    <label for="title">Title</label>
+    <input name="title" value="{{title}}" required id="title" />
+  </div>
+  <div>
+    <label for="content">Content</label>
+    <textarea
+      name="content"
+      style="width: 100%; height: 60%"
+      required
+      id="content"
+    >{{article}}</textarea>
+  </div>
+  <div>
+    <input type="submit" value="Submit Post" />
+  </div>
+</form>
+
+<button id="deletebtn">Delete Post</button>
+
+<script>
+document.getElementById('form').onsubmit = function(e) {
+    e.preventDefault();
+
+    const titleElem = document.getElementById('title');
+    const contentElem = document.getElementById('content');
+
+    const title = titleElem.value;
+    const article = contentElem.value;
+
+    fetch('/api/posts/{{id}}', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title,
+            article
+        })
+    }).then(res => {
+        if (res.status === 200) {
+            alert('Your post has been updated!');
+            window.location.href = '/dashboard';
+        }
+        else {
+            alert('There was an error updating your post!');
+        }
+    });
+}
+
+document.getElementById('deletebtn').onclick = async function() {
+    const result = await (await fetch('/api/posts/{{id}}', {
+        method: 'DELETE'
+    })).json();
+
+    if(result && result.success) {
+        alert('Deleted post!');
+        window.location.href = '/dashboard';
+    }
+    else {
+        alert('There was an issue deleting your post!');
+    }
+}
+</script>

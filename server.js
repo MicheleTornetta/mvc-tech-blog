@@ -3,13 +3,7 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 
-const helpers = require('./helpers');
-
-const hbs = exphbs.create({
-  helpers: {
-    posts: helpers.posts
-  },
-});
+const hbs = exphbs.create({});
 const app = express();
 const PORT = process.env.PORT || 3005;
 const sequelize = require('./config/connection');
@@ -24,11 +18,30 @@ app.use(session({
   cookie: { secure: false }
 }));
 
-global.posts = [];
-
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 // app.set('views', path.join(__dirname, 'views/'));
+
+app.use('*', (req, res, next) => {
+  if (req.session.user) {
+    const lastSeen = req.session.lastSeen;
+    let diff = (Date.now() - lastSeen) / 1000;
+
+    // If inactive for 5 min, reset their session
+    if (diff > 5 * 60) {
+      req.session.user = undefined;
+      req.session.lastSeen = undefined;
+      res.redirect('/login');
+    }
+    else {
+      req.session.lastSeen = Date.now();
+      next();
+    }
+  }
+  else {
+    next();
+  }
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,7 +52,6 @@ app.use('/api', require('./controllers/api/index'));
 // Add a comment describing the purpose of the 'get' route
 // GET route for getting all of the dishes that are on the menu
 app.get('/', async (req, res) => {
-
   const posts = (await Posts.findAll({
     include: [ Users ],
   })).map(post => {
@@ -75,27 +87,61 @@ app.get('/signup', (req, res) => {
   });
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', async (req, res) => {
   if (!req.session.user)
     res.redirect('/login');
   else {
+    const posts = await Posts.findAll({
+      where: {
+        user_id: req.session.user
+      }
+    });
+
     res.render('dashboard', {
-      user: req.session.user
+      user: req.session.user,
+      posts: posts.map(post => {
+        return {
+          title: post.dataValues.title,
+          id: post.dataValues.id,
+        }
+      })
     });
   }
 });
 
 app.get('/logout', (req, res) => {
   req.session.user = undefined;
+  req.session.lastSeen = undefined;
   res.redirect('/');
 });
 
-app.get('/post/:id', async (req, res) => {
+app.get('/post/edit/:id', async (req, res) => {
   if (!req.session.user) {
     res.redirect('/login');
     return;
   }
+  
+  const post = await Posts.findOne({
+    include: [ Users, { model: Comments, include: [Users] } ],
+    where: {
+      id: req.params.id,
+      user_id: req.session.user
+    }
+  });
 
+  if (!post || !post.dataValues) {
+    res.redirect('/dashboard');
+    return;
+  }
+
+  res.render('editpost', {
+    id: post.dataValues.id,
+    title: post.dataValues.title,
+    article: post.dataValues.article,
+  });
+});
+
+app.get('/post/:id', async (req, res) => {
   const post = await Posts.findOne({
     include: [ Users, { model: Comments, include: [Users] } ],
     where: {
@@ -110,25 +156,18 @@ app.get('/post/:id', async (req, res) => {
     username: post.dataValues.user.dataValues.username,
     user: req.session.user,
     post_id: post.dataValues.id,
-    comments: []
+    comments: post.dataValues.comments.map(comment => {
+      return {
+        comment: comment.dataValues.comment,
+        user: comment.dataValues.user.dataValues.username,
+        date: comment.dataValues.date.toLocaleDateString(),
+      }
+    })
   };
-
-  console.log(post.dataValues.comments.map(comment => {
-    return {
-      comment: comment.dataValues.comment,
-      user: comment.dataValues.user.dataValues.username,
-      date: comment.dataValues.date,
-    }
-  }));
   
   res.render('viewpost', obj);
 });
 
 sequelize.sync({ force: false }).then(async () => {
-  global.posts = await Posts.findAll({
-    include: [ Users, { model: Comments, include: [Users] } ],
-    order: [['date', 'DESC']]
-  });
-
   app.listen(PORT, () => console.log('Now listening http://localhost:' + PORT));
 });

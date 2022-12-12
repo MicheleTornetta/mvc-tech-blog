@@ -22,12 +22,30 @@ router.post("/", checkAuth, async (req, res) => {
   }
 });
 
-router.put("/", checkAuth, async (req, res) => {
+router.delete('/:id', checkAuth, async (req, res) => {
+  const result = await Post.destroy({
+    cascade: true,
+    where: {
+      id: req.params.id,
+      user_id: req.session.user
+    }
+  });
+
+  res.status(200).json({
+    success: result !== 0
+  });
+})
+
+router.put("/:id", checkAuth, async (req, res) => {
   try {
     // update a post
-    const result = await Post.update(req.body, {
+    const result = await Post.update({
+      title: req.body.title,
+      article: req.body.article,
+      date: new Date(),
+    }, {
       where: {
-        id: req.body.id,
+        id: req.params.id,
         user_id: req.session.user
       }
     });

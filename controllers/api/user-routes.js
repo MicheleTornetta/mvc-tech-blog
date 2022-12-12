@@ -35,6 +35,7 @@ router.post('/', async (req, res) => {
     const userData = await User.create(newUser);
 
     req.session.user = userData.id;
+    req.session.lastSeen = Date.now();
 
     res.status(200).json(userData);
   } catch (err) {
@@ -70,6 +71,7 @@ router.post('/login', async (req, res) => {
     if (userData) {
       if (await bcrypt.compare(user.password, userData.password)) {
         req.session.user = userData.id;
+        req.session.lastSeen = Date.now();
 
         res.status(200).json({
           username: userData.username,

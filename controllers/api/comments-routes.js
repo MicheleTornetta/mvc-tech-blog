@@ -8,7 +8,8 @@ router.post("/:id", checkAuth, async (req, res) => {
     await Comments.create({
       comment: req.body.comment,
       post_id: req.params.id,
-      user_id: req.session.user
+      user_id: req.session.user,
+      date: new Date(),
     });
 
     res.json({ message: "Success!" });

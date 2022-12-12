@@ -38,21 +38,8 @@ Posts.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'posts',
-
-    //to load database whenever it's changed for the purpose of handlebars
-    hooks: {
-      afterSave: updateGlobalVariable,
-      afterBulkUpdate: updateGlobalVariable,
-      afterBulkDestroy: updateGlobalVariable
-    }
   }
 );
 
-async function updateGlobalVariable() {
-  global.posts = await Posts.findAll({
-    include: [ Users, Comments ],
-    order: [['date', 'DESC']],
-  });
-}
 
 module.exports = Posts;
