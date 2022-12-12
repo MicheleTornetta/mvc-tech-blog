@@ -62,7 +62,9 @@ router.post('/login', async (req, res) => {
     }
     
     const userData = await User.findOne({
-      username: user.username,
+      where: {
+        username: user.username,
+      }
     });
 
     if (userData) {

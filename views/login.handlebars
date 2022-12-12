@@ -1,0 +1,48 @@
+
+
+<form class="form" id="form" method="post">
+  <div>
+    <label for="username">Username:</label>
+    <input id="username" required name="username"/>
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input id="password" type="password" required name="password"/>
+  </div>
+  <input type="submit" value="Login">
+  <div><a href="/signup">Sign up instead!</a></div>
+</form>
+<script defer>
+  document.getElementById("form").onsubmit = function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    fetch('http://localhost:3005/api/users/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+    }).then(res => {
+      if (res.status === 200) {
+        res.json().then(res => {
+          console.log(res);
+          if (res.err) {
+            alert(res.err);
+          }
+          else {
+            window.location.href = "/";
+          }
+        });
+      }
+      else {
+        alert('Invalid username/password!');
+      }
+    });
+  };
+</script>

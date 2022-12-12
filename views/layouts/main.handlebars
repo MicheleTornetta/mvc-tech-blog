@@ -1,19 +1,53 @@
 <html lang="en">
   <head>
-    {{> head}}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/assets/css/reset.css" />
+    <link rel="stylesheet" href="/assets/css/jass.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    {{! // <script src="./assets/js/script.js" defer></script> }}
     <title>GoLive WebDev Tech Blog</title>
   </head>
 
   <body>
     <div class="flex-column justify-space-around">
-      {{> nav}}
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#">Dashboard</a></li>
+          {{#unless user}}
+          <li><a href="/login">Login</a></li>
+          {{/unless}}
+          {{#if user}}
+          <li><a href="/logout">Logout</a></li>
+          {{/if}}
+        </ul>
+      </nav>
       <header class="jumbotron">
         <h1>
           GoLive WebDev Tech Blog ASDASD
         </h1>
+        <p>Your user id is {{user}}</p>
       </header>
       <main class="container container-fluid mt-5">
-        {{!-- {{viewpost}} --}}
+        {{{body}}}
       </main>
     </div>
   </body>
