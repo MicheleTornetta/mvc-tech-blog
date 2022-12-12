@@ -1,1 +1,11 @@
-<h2>PUT ALL POSTS TO SHOW TO USER HERE</h2>
+<ul>
+{{#each posts}}
+    <li>
+        <div>
+            <h3><a href="/post/{{this.id}}">{{this.title}}</a></h3>
+            <p>{{this.article}}</p>
+            <p>Posted by {{this.username}} on {{this.date}}</p>
+        </div>
+    </li>
+{{/each}}
+</ul>

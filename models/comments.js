@@ -17,7 +17,11 @@ Comments.init(
       autoIncrement: true,
     },
     comment: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(1024),
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
     user_id: {

@@ -1,16 +1,57 @@
- <form class="form" id="form">
-        <h1>Login</h1>
-        <br></br>
-        <p>
-          <label for="length">UserName</label>
-          <input/>
-        </p>
-        <p>
-          <label for="length">Password:</label>
-          <input/>
-        </p>
-        <p>
-          <button id="generate" class="loginbtn">Login</button>
-        </p>
-        <p>Sign Up Now!</p>
- </form>
+<button id="show-button" onclick="showForm()">Create Post</button>
+
+<div id="form-holder" style="display: none;">
+  <form class="form" id="form" method="post">
+    <h2>Create Post</h2>
+    <div>
+      <label for="title">Title</label>
+      <input name="title" required id="title"/>
+    </div>
+    <div>
+      <label for="content">Content</label>
+      <textarea name="content" style="width: 100%; height: 60%" required id="content"></textarea>
+    </div>
+    <div>
+      <input type="submit" value="Submit Post">
+    </div>
+  </form>
+</div>
+
+<script defer>
+  function showForm() {
+    document.getElementById('form-holder').style.display = 'block';
+    document.getElementById('show-button').style.display = 'none';
+  }
+
+  document.getElementById('form').onsubmit = function(e) {
+    e.preventDefault();
+
+    const titleElem = document.getElementById('title');
+    const contentElem = document.getElementById('content');
+
+    const title = titleElem.value;
+    const article = contentElem.value;
+
+    fetch('/api/posts/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title,
+        article
+      })
+    }).then(res => {
+      if (res.status === 200) {
+        alert('Your post has been created!');
+        titleElem.value = '';
+        contentElem.value = '';
+        document.getElementById('form-holder').style.display = 'none';
+        document.getElementById('show-button').style.display = 'inline-block';
+      }
+      else {
+        alert('There was an error creating your post!');
+      }
+    })
+  }
+</script>

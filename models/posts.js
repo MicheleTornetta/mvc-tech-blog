@@ -19,8 +19,9 @@ Posts.init(
       unique: true,
     },
     article: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(10000),
       allowNull: false,
+      
     },
     date: {
       type: DataTypes.DATE,

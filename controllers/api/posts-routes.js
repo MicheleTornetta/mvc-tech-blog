@@ -12,7 +12,7 @@ router.post("/", checkAuth, async (req, res) => {
       user_id: req.session.user,
       title: req.body.title,
       article: req.body.article,
-      date: req.body.date,
+      date: new Date(),
     });
 
     res.json({"message": "Success"});

@@ -1,7 +1,39 @@
 <h3>{{title}}</h3>
 <p>{{article}}</p>
-<p>Posted on 12/12/2022 by Joe</p>
+<p>Posted on {{date}} by {{username}}</p>
 <ul>
-  <li>Cool post (stacy on 12/14/2022)</li>
-  <li>Coolier post (jogn on 12/15/2022)</li>
+  {{#each comment}}
+  <li>{{this.comment}} by ({{this.username}} on {{this.date}})</li>
+  {{/each}}
 </ul>
+
+<form method="post" id="form">
+  <label for="comment">Add comment</label>
+  <input type="text" name="comment" id="comment">
+  <input type="submit" value="Submit Comment">
+</form>
+
+<script>
+  document.getElementById('form').onsubmit = async e => {
+    e.preventDefault();
+
+    const comment = document.getElementById('comment').value;
+
+    const result = await fetch('/api/comments/{{post_id}}', {
+      method: 'POST',
+      body: JSON.stringify({
+        comment,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (result.status === 200) {
+      window.location.href = window.location.href;
+    }
+    else {
+      alert('Unable to create your comment!');
+    }
+  }
+</script>

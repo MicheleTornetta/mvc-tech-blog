@@ -39,9 +39,27 @@ app.use('/api', require('./controllers/api/index'));
 // Add a comment describing the purpose of the 'get' route
 // GET route for getting all of the dishes that are on the menu
 app.get('/', async (req, res) => {
-  // This method is rendering the 'all' Handlebars.js template. This is how we connect each route to the correct template.
+
+  const posts = (await Posts.findAll({
+    include: [ Users ],
+  })).map(post => {
+    let articleData = post.dataValues.article;
+    if (articleData.length > 260) {
+      articleData = articleData.substring(0, 250) + '...';
+    }
+
+    return {
+      title: post.dataValues.title,
+      article: articleData,
+      date: post.dataValues.date.toLocaleDateString(),
+      username: post.dataValues.user.dataValues.username,
+      id: post.dataValues.id
+    };
+  });
+
   res.render('index', {
-    user: req.session.user
+    user: req.session.user,
+    posts: posts
   });
 });
 
@@ -57,12 +75,27 @@ app.get('/signup', (req, res) => {
   });
 });
 
+app.get('/dashboard', (req, res) => {
+  if (!req.session.user)
+    res.redirect('/login');
+  else {
+    res.render('dashboard', {
+      user: req.session.user
+    });
+  }
+});
+
 app.get('/logout', (req, res) => {
   req.session.user = undefined;
   res.redirect('/');
 });
 
 app.get('/post/:id', async (req, res) => {
+  if (!req.session.user) {
+    res.redirect('/login');
+    return;
+  }
+
   const post = await Posts.findOne({
     include: [ Users, { model: Comments, include: [Users] } ],
     where: {
@@ -70,17 +103,23 @@ app.get('/post/:id', async (req, res) => {
     }
   });
 
-  console.log(post);
-
   const obj = {
     title: post.dataValues.title,
     article: post.dataValues.article,
-    date: post.dataValues.date,
+    date: post.dataValues.date.toLocaleDateString(),
     username: post.dataValues.user.dataValues.username,
-    user: req.session.user
+    user: req.session.user,
+    post_id: post.dataValues.id,
+    comments: []
   };
 
-  console.log(obj);
+  console.log(post.dataValues.comments.map(comment => {
+    return {
+      comment: comment.dataValues.comment,
+      user: comment.dataValues.user.dataValues.username,
+      date: comment.dataValues.date,
+    }
+  }));
   
   res.render('viewpost', obj);
 });
