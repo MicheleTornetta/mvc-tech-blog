@@ -16,14 +16,18 @@ Comments.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    comments_title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     comment: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
   // config options
   {

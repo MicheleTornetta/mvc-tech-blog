@@ -8,10 +8,7 @@ function posts() {
             article: post.dataValues.article,
             date: post.dataValues.date,
             user: post.dataValues.user?.dataValues.username,
-            comments: {
-                title: post.dataValues.comments?.dataValues?.comments_title,
-                comment: post.dataValues.comments?.dataValues?.comment
-            }
+            comments: post.dataValues.comments
         }
     });
 

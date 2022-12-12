@@ -3,10 +3,17 @@ const Post = require("../../models/posts");
 const checkAuth = require("../auth/authentication");
 
 
-router.post("/",  async (req, res) => {
+router.post("/", checkAuth, async (req, res) => {
   try {
     // create a post
-    await Post.create(req.body);
+    console.log(req.session.user);
+
+    await Post.create({
+      user_id: req.session.user,
+      title: req.body.title,
+      article: req.body.article,
+      date: req.body.date,
+    });
 
     res.json({"message": "Success"});
   } catch (err) {
@@ -21,6 +28,7 @@ router.put("/", checkAuth, async (req, res) => {
     const result = await Post.update(req.body, {
       where: {
         id: req.body.id,
+        user_id: req.session.user
       }
     });
 

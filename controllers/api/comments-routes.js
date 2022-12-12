@@ -4,8 +4,13 @@ const checkAuth = require("../auth/authentication");
 
 router.post("/", checkAuth, async (req, res) => {
   try {
-    // create a post
-    await Comments.create(req.body);
+    // create a comment
+    await Comments.create({
+      title: req.body.title,
+      comment: req.body.comment,
+      post_id: req.body.post_id,
+      user_id: req.session.user
+    });
 
     res.json({ message: "Success!" });
   } catch (err) {

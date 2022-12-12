@@ -36,15 +36,8 @@ Issues/Steps
 
 Your task this week is to build a CMS-style blog site
 ---developers can publish their blog posts and comment on other developers’ posts as well. 
----deploy it to Heroku. 
----follow the MVC paradigm in its architectural structure
-------using Handlebars.js as the templating language, 
-------Sequelize as the ORM, 
-------express-session npm package for authentication.
 
 
-## Acceptance Criteria
----CMS-style blog site
 ---presented with the homepage
 ------includes existing blog posts if any have been posted
 ------navigation links for the homepage and the dashboard

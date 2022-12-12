@@ -8,7 +8,8 @@ const helpers = require('./helpers');
 const hbs = exphbs.create({
   helpers: {
     posts: helpers.posts
-  }
+  },
+  partialsDir: path.join(__dirname, 'views/partials')
 });
 const app = express();
 const PORT = process.env.PORT || 3005;
@@ -38,10 +39,31 @@ app.use('/api', require('./controllers/api/index'));
 
 // Add a comment describing the purpose of the 'get' route
 // GET route for getting all of the dishes that are on the menu
-app.get('/', async (req, res) => {
-  // Add a comment describing the purpose of the render method
-  // This method is rendering the 'all' Handlebars.js template. This is how we connect each route to the correct template.
-  res.render('all');
+// app.get('/', async (req, res) => {
+//   // This method is rendering the 'all' Handlebars.js template. This is how we connect each route to the correct template.
+//   res.render('all');
+// });
+
+app.get('/post/:id', async (req, res) => {
+  const post = await Posts.findOne({
+    include: [ Users, { model: Comments, include: [Users] } ],
+    where: {
+      id: req.params.id
+    }
+  });
+
+  console.log(post);
+
+  const obj = {
+    title: post.dataValues.title,
+    article: post.dataValues.article,
+    date: post.dataValues.date,
+    username: post.dataValues.user.dataValues.username,
+  };
+
+  console.log(obj);
+  
+  res.render('layouts/login.handlebars', obj);
 });
 
 sequelize.sync({ force: false }).then(async () => {
