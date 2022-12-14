@@ -85,3 +85,23 @@ li {
 #deletebtn {
   background-color: var(--btn);
 }
+
+input[type=text] {
+  padding:5px; 
+  border:2px solid var (--headbg); 
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+input[type=text]:focus {
+  border-color:#333;
+}
+
+input[type=submit] {
+  padding:5px 15px; 
+  background:var(--btn); 
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+}
