@@ -1,10 +1,10 @@
 <ul>
 {{#each posts}}
     <li>
-        <div>
+        <div class="postArticle">
             <h3><a href="/post/{{this.id}}">{{this.title}}</a></h3>
             <p>{{this.article}}</p>
-            <p>Posted by {{this.username}} on {{this.date}}</p>
+            <p class="italic">Posted by {{this.username}} on {{this.date}}</p>
         </div>
     </li>
 {{/each}}

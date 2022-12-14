@@ -1,19 +1,63 @@
-body {
+/*Colors*/
+
+:root {
+  --bodybg: #F2F2F2;
+  --headbg: #05292F;
+  --navbg: #05292F;
+  --btn: #CB2D6F;
+  --deletebtn: #1c3334;
+  --text: #333333;
+}
+
+.body {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1;
   display: flex;
 }
 
+.headbg {
+  background-color: var(--headbg);
+  width: 100%;
+  height: 20px;
+  flex-direction: row;
+}
+
+#navbar ul {
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+#navbar li {
+  
+  list-style: none;
+  /* align-items: center; */
+  /* justify-content: center; */
+  padding: 5px 20px;
+  text-align: center;
+  background-color: var(--navbg);
+  display: inline;
+  padding: 20px 20px 5px 20px;
+  margin: 20px 0 0 0;
+}
+
+
+
+li {
+  list-style: none;
+  align-items: center;
+  padding: 20px 20px;
+}
 /*header decoration*/
 
 .jumbotron {
   text-align: center;
   background-color: transparent;
-  color: black;
+  color: var(--navbg);
   border-radius: 0;
-  border-bottom: 10px solid black;
+  border-bottom: 10px solid var(--navbg);
   flex-direction: column;
+  border-style: solid; 
 }
 
 /*each row of the calendar */
@@ -24,57 +68,20 @@ body {
   justify-content: center;
 }
 
-/*save buttone at the end of each row of the calendar */
-.saveBox {
-  height: 40px;
-  width: 65px;
+/*save button at the end of each row of the calendar */
+#form.holder {
   padding: 10px 0px 10px 10px;
   justify-self: right;
   background-color: #000000;
   color: #ffffff;
   display: flex;
-}
-/*text input of each row of the calendar */
-.inputBox {
-  height: 40px;
-  width: 600px;
-  min-width: 100px;
-  padding: 10px 0px 10px 3px;
-  display: flex;
-  background: transparent;
-  border: none;
-  resize: none;
-  color: #000000;
-  border: 1px solid black;
-  padding: 10px;
+
 }
 
-/*time slot on each row of the calendar */
-.timeBox {
-  height: 40px;
-  width: 100px;
-  text-align: center;
-  padding: 10px 0px 10px 10px;
-  display: flex;
-  background-color: #000000;
-  color: #ffffff;
-  border-top: 1px dashed #000000;
+#show-button {
+  background-color: var(--btn);
 }
 
-/*color of input box when past the hour*/
-.past {
-  background-color: #adadad;
-  color: #333333;
-}
-
-/*color of input box at the present hour*/
-.present {
-  background-color: #ac3b61;
-  color: white;
-}
-
-/*color of input box when the hour is in future*/
-.future {
-  background-color: #123c69;
-  color: white;
+#deletebtn {
+  background-color: var(--btn);
 }

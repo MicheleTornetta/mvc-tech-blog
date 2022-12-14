@@ -21,7 +21,7 @@ app.use(session({
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-// app.set('views', path.join(__dirname, 'views/'));
+app.set('views', path.join(__dirname, 'views/'));
 
 app.use('*', (req, res, next) => {
   if (req.session.user) {
@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'public/')));
 app.use('/api', require('./controllers/api/index'));
 
 // Add a comment describing the purpose of the 'get' route
-// GET route for getting all of the dishes that are on the menu
+// GET route for getting all of the posts
 app.get('/', async (req, res) => {
   const posts = (await Posts.findAll({
     include: [ Users ],
