@@ -29,7 +29,6 @@
 }
 
 #navbar li {
-  
   list-style: none;
   /* align-items: center; */
   /* justify-content: center; */
@@ -39,7 +38,10 @@
   display: inline;
   padding: 20px 20px 5px 20px;
   margin: 20px 0 0 0;
+  color: var(--bodybg);
 }
+
+
 
 
 
@@ -60,30 +62,32 @@ li {
   border-style: solid; 
 }
 
-/*each row of the calendar */
-.rowBox {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-}
-
-/*save button at the end of each row of the calendar */
 #form.holder {
   padding: 10px 0px 10px 10px;
   justify-self: right;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var (--bodybg);
+  color: var (--text);
   display: flex;
-
 }
 
 #show-button {
   background-color: var(--btn);
+  padding:5px 20px;  
+  border:2px solid;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+  color: var(--bodybg)
 }
 
 #deletebtn {
   background-color: var(--btn);
+  padding:5px 20px;  
+  border:2px solid;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+  color: var(--bodybg);
 }
 
 input[type=text] {
@@ -94,14 +98,25 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-  border-color:#333;
+  border-color:var(--headbg);
+  color: var(--text);
 }
 
 input[type=submit] {
-  padding:5px 15px; 
+  padding: 5px 15px; 
   background:var(--btn); 
   border:0 none;
-  cursor:pointer;
+  cursor:pointer; 
   -webkit-border-radius: 5px;
   border-radius: 5px; 
+  color: var(--bodybg);
+}
+
+input[type=text]:hover {
+  background:var(--bodybg);
+}
+
+input[type=text]:active {
+  background:var(--bodybg);
+  color: var(--text);
 }

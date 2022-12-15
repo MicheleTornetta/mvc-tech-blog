@@ -17,7 +17,7 @@ Comments.init(
       autoIncrement: true,
     },
     comment: {
-      type: DataTypes.STRING(1024),
+      type: DataTypes.STRING(500),
       allowNull: false,
     },
     date: {
