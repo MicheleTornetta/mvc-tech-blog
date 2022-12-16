@@ -17,7 +17,7 @@ Once on the website, the visiting developer can read blog posts other developers
 
 ## Usage Video
 An example of how it works can be viewed here: 
-![Application Gif](./public/assets/images/techblogvideo.gif)
+![Application Gif](.assets/images/techblogvideo.gif)
 
 ## License 
 A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license notice in any copy of the software/source.  There are many variations of this license in use.
@@ -31,3 +31,4 @@ or email me at:
 mlt@pwahsolutions.com
 
 ## Website
+https://pacific-depths-98854.herokuapp.com/
