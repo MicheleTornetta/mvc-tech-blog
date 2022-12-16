@@ -2,13 +2,13 @@ const Comments = require('./comments');
 const Posts = require('./posts');
 const Users = require('./user');
 
-// Define a Post as having one Auther to create a foreign key in the `license` table
+// Define a Post as having one Auther to create a foreign key 
 Comments.belongsTo(Posts, {
   // When we delete a Post, delete the associated comments.
   onDelete: 'CASCADE',
 });
 
-// We can also define the association starting with License
+// We can also define the association starting with Comments
 Posts.hasMany(Comments, {
   onDelete: 'CASCADE',
 });
