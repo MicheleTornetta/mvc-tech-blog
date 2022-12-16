@@ -17,7 +17,7 @@ Once on the website, the visiting developer can read blog posts other developers
 
 ## Usage Video
 An example of how it works can be viewed here: 
-![Watch the video](.public/assets/images/techblogvideo.gif)
+![Watch the video](https://www.youtube.com/watch?v=GANl6aods5s))
 
 ## License 
 A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license notice in any copy of the software/source.  There are many variations of this license in use.
