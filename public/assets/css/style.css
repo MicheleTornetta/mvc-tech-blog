@@ -41,10 +41,6 @@
   color: var(--bodybg);
 }
 
-
-
-
-
 li {
   list-style: none;
   align-items: center;
@@ -54,8 +50,8 @@ li {
 
 .jumbotron {
   text-align: center;
-  background-color: transparent;
-  color: var(--navbg);
+  background-color: var(--navbg);
+  color: var(--bodybg);
   border-radius: 0;
   border-bottom: 10px solid var(--navbg);
   flex-direction: column;
@@ -119,4 +115,11 @@ input[type=text]:hover {
 input[type=text]:active {
   background:var(--bodybg);
   color: var(--text);
+}
+
+.posts {
+  list-style:circle;
+  color:#333333;
+  padding: 10px 0 0 20px;
+  margin: 0 0 0 20px;
 }

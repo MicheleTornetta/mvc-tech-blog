@@ -1,6 +1,8 @@
+<h2>Your Posts</h2>
+<p>To edit your post, click on the title.</p>
 <ul class="dbedit">
 {{#each posts}}
-  <li><a href="/post/edit/{{this.id}}">{{this.title}}</a></li>
+  <li class="posts"><a href="/post/edit/{{this.id}}">{{this.title}}</a></li>
 {{/each}}
 </ul>
 

@@ -95,29 +95,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// router.get('/by-email/:email', async (req, res) => {
-//   try {
-//     // First, we find a user using their primary key (provided by params)
-//     const userData = await User.findByPk(req.params.email);
-//     // If userData evaluates as false (no user exists with that primary key), then we will send an error message
-//     if (!userData) {
-//       res.status(404).json({ message: 'No user with this email!' });
-//       return;
-//     }
-//     // If a user does exist at the primary key, we get to use the instance method that we wrote in User.js to see if the user has pets
-//     const emailData = userData.email();
-//     // If emailData evaluates as false (user has no email), then the user will receive the message below
-//     if (!emailData) {
-//       res.status(400).json({ message: 'This person has no email on file.' });
-//       return;
-//     }
-//     // Otherwise, the user will see that the user that they searched does have pets!
-//     res.json({ message: 'Your email has no password associated with it!' });
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
-
 // PUT update a user
 router.put('/', checkAuth, async (req, res) => {
   try {
